@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<title>[[${tarea.id ne null ? 'Editar' : 'Crear'}]] Tarea</title>
+		
+		<link th:replace="masterPage :: bootstrap-css">
+		
+		<link th:replace="masterPage :: fa-icons">
+		
+		<style>
+			.invalid-feedback {
+				display: block;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div th:replace="masterPage :: header"></div>
+		
+		<div class="container-fluid">
+			<h3>[[${tarea.id ne null ? 'Editar' : 'Crear'}]] Tarea</h3>
+		
+			<form action="" th:object="${tarea}" method="post" novalidate>
+				<div class="mb-2">
+					<label for="titulo">Titulo</label>
+					<input 
+						id="titulo" 
+						type="text" 
+						placeholder="Titulo" 
+						class="form-control" 
+						th:field="*{titulo}" 
+						th:errorclass="is-invalid"
+					>
+				
+					<div class="invalid-feedback" th:errors="*{titulo}"></div>
+				</div>
+			
+				<div class="mb-2">
+					<label for="fechaLimite">Fecha Limite de Entrega</label>
+					<input 
+						id="fechaLimite" 
+						type="date" 
+						placeholder="Fecha Limite de Entrega" 
+						class="form-control" 
+						th:field="*{fechaLimite}" 
+						th:errorclass="is-invalid"
+					>
+				
+					<div class="invalid-feedback" th:errors="*{fechaLimite}"></div>
+				</div>
+			
+				<div class="btn-group" role="group" aria-label="Basic radio toggle button group" th:if="*{id != null}">
+  					<label>
+        				<input type="radio" name="status" th:checked="*{status}" value="true"> Completado
+    				</label>
+    			
+    				<label>
+        				<input type="radio" name="status" th:checked="*{!status}" value="false"> Pendiente
+    				</label>
+				</div>
+			
+				<p></p>
+			
+				<div class="form-floating mb-2">
+  					<textarea
+  						id="descripcion" 
+  						class="form-control" 
+  						placeholder="Descripcion"
+						th:field="*{descripcion}" 
+						th:errorclass="is-invalid"
+						style="height: 100px"
+  					></textarea>
+  					<label for="floatingTextarea">Descripcion</label>
+				</div>
+			
+				<a th:href="@{/tarea/admin}" class="btn btn-danger me-2"> 
+					Cancelar
+				</a>
+			
+				<button class="btn btn-primary">[[${tarea.id ne null ? 'Actualizar' : 'Crear'}]] Tarea</button>
+			</form>
+		</div>
+		
+		<div th:replace="masterPage :: footer"></div>
+		
+		<div th:replace="masterPage :: bootstrap-js"></div>
+	</body>
+</html>

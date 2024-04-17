@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<title>Pagina Maestra</title>
+		
+		<link th:fragment="bootstrap-css"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+			rel="stylesheet" 
+			integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+			crossorigin="anonymous"
+		>
+		<link th:fragment="fa-icons"
+			rel="stylesheet" 
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+			integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+			crossorigin="anonymous" 
+			referrerpolicy="no-referrer" 
+		/>
+	</head>
+	<body>
+		<header th:fragment="header">
+			<nav class="navbar navbar-expand-lg bg-body">
+  				<div class="container-fluid">
+    				<a class="navbar-brand" th:href="@{/inicio}">
+    					<img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24">
+    				</a>
+    				
+    				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      					<span class="navbar-toggler-icon"></span>
+    				</button>
+    				
+    				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+      					<ul class="navbar-nav">
+        					<li class="nav-item">
+          						<a class="nav-link active" aria-current="page" th:href="@{/inicio}">Inicio</a>
+        					</li>
+        					
+        					<li class="nav-item dropdown">
+          						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            						Tareas
+          						</a>
+          						
+          						<ul class="dropdown-menu">
+            						<li><a class="dropdown-item" th:href="@{/tarea/admin}">Todas</a></li>
+            						<li><a class="dropdown-item" th:href="@{/tarea/pendientes}">Pendientes</a></li>
+            						<li><a class="dropdown-item" th:href="@{/tarea/atrasadas}">Atrasadas</a></li>
+            						<li><a class="dropdown-item" th:href="@{/tarea/completadas}">Completadas</a></li>
+          						</ul>
+        					</li>
+        					
+        					<li class="nav-item">
+          						<a class="nav-link" th:href="@{/contacto/admin}">Contactos</a>
+        					</li>
+      					</ul>
+    				</div>
+    				
+    				<a class="btn btn-outline-darck" th:href="@{/logout}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar sesión">
+    					<i class="fa-solid fa-arrow-right-from-bracket"></i>
+    				</a>
+  				</div>
+			</nav>
+			
+			<div class="p-5 text-center bg-body-tertiary">
+    			<h1 class="mb-3">Agenda Virtual</h1>
+    			<h4 class="mb-3">Desarrollo de Aplicaciones Web</h4>
+  			</div>
+		</header>
+		
+		<div th:replace="${content}"></div>
+		
+		<footer th:fragment="footer" class="py-3 my-4">
+			<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+				<li class="nav-item">
+					<a th:href="@{/inicio}" class="nav-link px-2 text-body-secondary">Inicio</a>
+				</li>
+				
+				<li class="nav-item">
+					<a th:href="@{/tarea/admin}" class="nav-link px-2 text-body-secondary">Tareas</a>
+				</li>
+				
+				<li class="nav-item">
+					<a th:href="@{/contacto/admin}" class="nav-link px-2 text-body-secondary">Contactos</a>
+				</li>
+			</ul>
+			
+			<p class="text-center text-body-secondary">&#169;​ 2024 Agenda Virtual</p>
+		</footer>
+		
+		<script th:fragment="bootstrap-js"
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+			integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>

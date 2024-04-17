@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<title>[[${contacto.id ne null ? 'Editar' : 'Crear'}]] Contaco</title>
+		
+		<link th:replace="masterPage :: bootstrap-css">
+		
+		<link th:replace="masterPage :: fa-icons">
+		
+		<style>
+			.invalid-feedback {
+				display: block;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div th:replace="masterPage :: header"></div>
+		
+		<div class="container-fluid">
+			<h3>[[${contacto.id ne null ? 'Editar' : 'Crear'}]] Contaco</h3>
+	
+			<form action="" th:object="${contacto}" method="post" novalidate>
+				<div class="mb-2">
+					<label for="nombre">Nombre</label>
+					<input 
+						id="nombre" 
+						type="text" 
+						placeholder="Nombre" 
+						class="form-control" 
+						th:field="*{nombre}" 
+						th:errorclass="is-invalid"
+					>
+				
+					<div class="invalid-feedback" th:errors="*{nombre}"></div>
+				</div>
+			
+				<div class="mb-2">
+					<label for="fechaNacimiento">Fecha nacimiento</label>
+					<input 
+						id="fechaNacimiento" 
+						type="date" 
+						placeholder="Fecha nacimiento" 
+						class="form-control" 
+						th:field="*{fechaNacimiento}" 
+						th:errorclass="is-invalid"
+					>
+				
+					<div class="invalid-feedback" th:errors="*{fechaNacimiento}"></div>
+				</div>
+			
+				<div class="mb-2">
+					<label for="celular">Celular</label>
+					<input 
+						id="celular" 
+						type="tel" 
+						placeholder="Celular" 
+						class="form-control" 
+						th:field="*{celular}" 
+						th:errorclass="is-invalid"
+					>
+				
+					<div class="invalid-feedback" th:errors="*{celular}"></div>
+				</div>
+			
+				<div class="mb-2">
+					<label for="email">E-mail</label>
+					<input 
+						id="email" 
+						type="email" 
+						placeholder="E-mail" 
+						class="form-control" 
+						th:field="*{email}" 
+						th:errorclass="is-invalid"
+					>
+				
+					<div class="invalid-feedback" th:errors="*{email}"></div>
+				</div>
+			
+				<a th:href="@{/contacto/admin}" class="btn btn-danger me-2">
+					Cancelar
+				</a>
+			
+				<button class="btn btn-primary">[[${contacto.id ne null ? 'Actualizar' : 'Crear'}]] Contacto</button>
+			</form>
+		</div>
+		
+		<div th:replace="masterPage :: footer"></div>
+
+		<div th:replace="masterPage :: bootstrap-js"></div>
+	</body>
+</html>

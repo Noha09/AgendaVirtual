@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<title>Agenda Virtual</title>
+		
+		<link th:replace="masterPage :: bootstrap-css">
+		
+		<link th:replace="masterPage :: fa-icons">
+	</head>
+	
+	<body>
+		<div th:replace="masterPage :: header"></div>
+		
+		<div class="container-fluid">
+			<h3>Mis Contactos</h3>
+		
+			<div class="alert alert-success alert-dismissible mt-3" th:if="${msgExito ne null}">
+				[[${msgExito}]]
+				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			</div>
+		
+			<div class="text-end">
+				<a th:href="@{/contacto/nuevo}" class="btn" style="background-color: #7F2E98; color: #fff;"> 
+					<i class="fa fa-plus"></i> Registrar Contacto
+				</a>
+			</div>
+	
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Fecha Nacimiento</th>
+						<th>Celular</th>
+						<th>Email</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+			
+				<tbody>
+					<tr th:each="contacto : ${contactos}" th:object="${contacto}">
+						<td th:text="*{nombre}"></td>
+						<td th:text="*{#temporals.format(fechaNacimiento, 'dd/MM/YYYY')}"></td>
+						<td th:text="*{celular}"></td>
+						<td th:text="*{email}"></td>
+						<td>
+							<div class="btn-group btn-group-sm">
+								<a th:href="@{/contacto/{idContacto}/editar(idContacto=*{id})}" class="btn btn-primary">
+									<i class="fa fa-edit"></i>
+								</a>
+							
+								<button class="btn btn-danger" onclick="eliminarContacto(this)">
+									<i class="fa fa-trash"></i>
+								</button>
+							
+								<form th:action="@{/contacto/{idContacto}/eliminar(idContacto=*{id})}" method="post"></form>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<!-- <div class="row">
+    		<div class="col-sm-6">
+    			<div sd:pagination-summary=""></div>
+    		</div>
+   			<div class="col-sm-6">
+    			<nav class="pull-right">
+					<ul class="pagination" sd:pagination="full">
+					</ul>
+				</nav>
+    		</div>
+		</div> -->
+		
+		<div th:replace="masterPage :: footer"></div>
+		
+		<div th:replace="masterPage :: bootstrap-js"></div>
+		
+		<script>
+			function eliminarContacto(element) {
+				let ok = confirm('Estas Seguro de Eliminar Este Contacto?');
+				
+				if (ok) {
+					element.nextElementSibling.submit();
+				}
+			}
+		</script>
+	</body>
+</html>
