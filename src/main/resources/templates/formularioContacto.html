@@ -20,7 +20,7 @@
 	<body>
 		<div th:replace="masterPage :: header"></div>
 		
-		<div class="container-fluid">
+		<div class="container-fluid" th:fragment="content">
 			<h3>[[${contacto.id ne null ? 'Editar' : 'Crear'}]] Contaco</h3>
 	
 			<form action="" th:object="${contacto}" method="post" novalidate>

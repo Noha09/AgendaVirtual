@@ -19,7 +19,7 @@
 	<body>
 		<div th:replace="masterPage :: header"></div>
 	
-		<div class="container-fluid">
+		<div class="container-fluid" th:fragment="content">
 			<h2>Bienvenido: <span th:text="${usuario.nombre}"></span></h2>
 			
 			<div class="row">
