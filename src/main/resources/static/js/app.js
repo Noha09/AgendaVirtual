@@ -1,9 +1,40 @@
 function eliminarTarea(element) {
-	let ok = confirm('Estas Seguro de Eliminar Esta Tarea?');
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+		  confirmButton: "btn btn-success",
+		  cancelButton: "btn btn-danger"
+		},
+		buttonsStyling: false
+  	});
 
-	if (ok) {
-		element.nextElementSibling.submit();
-	}
+  	swalWithBootstrapButtons.fire({
+		title: "Estas seguro de eliminar esta Tarea?",
+		text: "You won't be able to revert this!",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonText: "Si, borrar!",
+		cancelButtonText: "No, cancelar!",
+		reverseButtons: true
+  	}).then((result) => {
+		if (result.isConfirmed) {
+			element.nextElementSibling.submit();
+
+		  	swalWithBootstrapButtons.fire({
+				title: "Eliminado!",
+				text: "Tarea eliminado correctamente.",
+				icon: "success"
+		  	});
+		} else if (
+		  	/* Read more about handling dismissals below */
+		  	result.dismiss === Swal.DismissReason.cancel
+		) {
+		  	swalWithBootstrapButtons.fire({
+				title: "Cancelado",
+				text: "Your imaginary file is safe :)",
+				icon: "error"
+		  	});
+		}
+	});
 }
 
 let elementosCarta = document.querySelectorAll('.card');

@@ -9,6 +9,8 @@
 		<link th:replace="masterPage :: bootstrap-css">
 		
 		<link th:replace="masterPage :: fa-icons">
+
+		<link th:replace="masterPage :: sweetalert2-css">
 	</head>
 	
 	<body>
@@ -78,14 +80,53 @@
 		<div th:replace="masterPage :: footer"></div>
 		
 		<div th:replace="masterPage :: bootstrap-js"></div>
+
+		<div th:replace="masterPage :: sweetalert2-js"></div>
 		
 		<script>
 			function eliminarContacto(element) {
-				let ok = confirm('Estas Seguro de Eliminar Este Contacto?');
+				const swalWithBootstrapButtons = Swal.mixin({
+  					customClass: {
+    					confirmButton: "btn btn-success",
+    					cancelButton: "btn btn-danger"
+  					},
+  					buttonsStyling: false
+				});
+
+				swalWithBootstrapButtons.fire({
+  					title: "Estas seguro de eliminar este contacto?",
+  					text: "You won't be able to revert this!",
+  					icon: "warning",
+  					showCancelButton: true,
+  					confirmButtonText: "Si, borrar!",
+  					cancelButtonText: "No, cancelar!",
+  					reverseButtons: true
+				}).then((result) => {
+  					if (result.isConfirmed) {
+						element.nextElementSibling.submit();
+
+    					swalWithBootstrapButtons.fire({
+      						title: "Eliminado!",
+      						text: "Contacto eliminado correctamente.",
+      						icon: "success"
+    					});
+  					} else if (
+   					 /* Read more about handling dismissals below */
+    					result.dismiss === Swal.DismissReason.cancel
+  					) {
+    					swalWithBootstrapButtons.fire({
+      						title: "Cancelado",
+      						text: "Your imaginary file is safe :)",
+      						icon: "error"
+    					});
+  					}
+				});
+
+				/*let ok = confirm('Estas Seguro de Eliminar Este Contacto?');
 				
 				if (ok) {
 					element.nextElementSibling.submit();
-				}
+				}*/
 			}
 		</script>
 	</body>
