@@ -63,13 +63,15 @@
                             	</form> <br>
 							</div>
 							
-							<div class="btn-group btn-group-sm">
-								<a th:href="@{/tarea/{idtarea}/editar(idtarea=*{id})}" class="btn btn-primary">
+							<div class="btn-group">
+								<a th:href="@{/tarea/{idtarea}/editar(idtarea=*{id})}" class="btn btn-primary me-md-4 rounded">
 									<i class="fa fa-edit"></i>
+									Editar
 								</a>
-							
-								<button class="btn btn-danger" onclick="eliminarTarea(this)">
+
+								<button class="btn btn-danger rounded" onclick="eliminarTarea(this)">
 									<i class="fa fa-trash"></i>
+									Eliminar
 								</button>
 							
 								<form th:action="@{/tarea/{idtarea}/eliminar(idtarea=*{id})}" method="post"></form>
