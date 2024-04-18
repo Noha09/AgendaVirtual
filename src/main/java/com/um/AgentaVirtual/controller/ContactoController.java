@@ -119,7 +119,7 @@ public class ContactoController {
 		
 		contactoRepository.delete(contacto);
 		
-		ra.addFlashAttribute("msgExito", "El contacto se a eliminado correctamente");
+		// ra.addFlashAttribute("msgExito", "El contacto se a eliminado correctamente");
 		
 		return "redirect:/contacto/admin";
 	}

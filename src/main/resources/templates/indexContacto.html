@@ -85,48 +85,25 @@
 		
 		<script>
 			function eliminarContacto(element) {
-				const swalWithBootstrapButtons = Swal.mixin({
-  					customClass: {
-    					confirmButton: "btn btn-success",
-    					cancelButton: "btn btn-danger"
-  					},
-  					buttonsStyling: false
-				});
-
-				swalWithBootstrapButtons.fire({
-  					title: "Estas seguro de eliminar este contacto?",
-  					text: "You won't be able to revert this!",
-  					icon: "warning",
-  					showCancelButton: true,
-  					confirmButtonText: "Si, borrar!",
-  					cancelButtonText: "No, cancelar!",
-  					reverseButtons: true
-				}).then((result) => {
-  					if (result.isConfirmed) {
+				Swal.fire({
+					title: "Estas seguro de eliminar el contacto?",
+					text: "Esta accion no se puede revertir!",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes, eliminar!"
+	  			}).then((result) => {
+					if (result.isConfirmed) {
 						element.nextElementSibling.submit();
 
-    					swalWithBootstrapButtons.fire({
-      						title: "Eliminado!",
-      						text: "Contacto eliminado correctamente.",
-      						icon: "success"
-    					});
-  					} else if (
-   					 /* Read more about handling dismissals below */
-    					result.dismiss === Swal.DismissReason.cancel
-  					) {
-    					swalWithBootstrapButtons.fire({
-      						title: "Cancelado",
-      						text: "Your imaginary file is safe :)",
-      						icon: "error"
-    					});
-  					}
+		  				Swal.fire({
+							title: "Eliminado!",
+							text: "El contacto se elimino correctamente.",
+							icon: "success"
+		  				});
+					}
 				});
-
-				/*let ok = confirm('Estas Seguro de Eliminar Este Contacto?');
-				
-				if (ok) {
-					element.nextElementSibling.submit();
-				}*/
 			}
 		</script>
 	</body>

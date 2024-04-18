@@ -1,37 +1,20 @@
 function eliminarTarea(element) {
-	const swalWithBootstrapButtons = Swal.mixin({
-		customClass: {
-		  confirmButton: "btn btn-success",
-		  cancelButton: "btn btn-danger"
-		},
-		buttonsStyling: false
-  	});
-
-  	swalWithBootstrapButtons.fire({
-		title: "Estas seguro de eliminar esta Tarea?",
-		text: "You won't be able to revert this!",
+	Swal.fire({
+		title: "Estas seguro de eliminar la tarea?",
+		text: "Esta accion no se puede revertir!",
 		icon: "warning",
 		showCancelButton: true,
-		confirmButtonText: "Si, borrar!",
-		cancelButtonText: "No, cancelar!",
-		reverseButtons: true
-  	}).then((result) => {
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "Yes, eliminar!"
+	  }).then((result) => {
 		if (result.isConfirmed) {
 			element.nextElementSibling.submit();
 
-		  	swalWithBootstrapButtons.fire({
+		  	Swal.fire({
 				title: "Eliminado!",
-				text: "Tarea eliminado correctamente.",
+				text: "La tarea se elimino correctamente.",
 				icon: "success"
-		  	});
-		} else if (
-		  	/* Read more about handling dismissals below */
-		  	result.dismiss === Swal.DismissReason.cancel
-		) {
-		  	swalWithBootstrapButtons.fire({
-				title: "Cancelado",
-				text: "Your imaginary file is safe :)",
-				icon: "error"
 		  	});
 		}
 	});

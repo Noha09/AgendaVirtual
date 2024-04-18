@@ -227,7 +227,7 @@ public class TareaController {
 		
 		tareaRepository.delete(tarea);
 		
-		ra.addFlashAttribute("msgExito", "La tarea se a eliminado correctamente");
+		// ra.addFlashAttribute("msgExito", "La tarea se a eliminado correctamente");
 		
 		return "redirect:/tarea/admin";
 	}
