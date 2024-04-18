@@ -7,13 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,18 +47,8 @@ public class TareaController {
 			HttpServletRequest request
 	) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
 	
 		Usuario u = usuarioRepository.findByEmail(auth.getName());
-
-		PageRequest pageRequest = PageRequest.of(page, 9);
-		Page<Tarea> pageTarea = tareaRepository.getAll(pageRequest);
-		int totalPages = pageTarea.getTotalPages();
-
-		if (totalPages > 0) {
-			List<Integer> pages = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-			model.addAttribute("pages", pages);
-		}
 		
 		List<Tarea> tareas = tareaRepository.findByIdUsuario(u.getId()); // Buscar las tareas de cada usuario
 		List<Tarea> tareasOrdenadas = tareas.stream()
