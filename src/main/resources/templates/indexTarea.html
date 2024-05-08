@@ -35,7 +35,7 @@
 			</form>
 			
 			<div class="text-end">
-				<a th:href="@{/tarea/nuevo}" class="btn" style="background-color: #7F2E98; color: #fff;"> 
+				<a th:href="@{/tarea/nuevo}" class="btn" style="background-color: #7F2E98; color: #fff;" title="Agregar Tarea"> 
 					<i class="fa fa-plus"></i> Agregar Tarea
 				</a>
 			</div>
@@ -64,12 +64,12 @@
 							</div>
 							
 							<div class="btn-group">
-								<a th:href="@{/tarea/{idtarea}/editar(idtarea=*{id})}" class="btn btn-primary me-md-4 rounded">
+								<a th:href="@{/tarea/{idtarea}/editar(idtarea=*{id})}" class="btn btn-primary me-md-4 rounded" title="Editar">
 									<i class="fa fa-edit"></i>
 									Editar
 								</a>
 
-								<button class="btn btn-danger rounded" onclick="eliminarTarea(this)">
+								<button class="btn btn-danger rounded" onclick="eliminarTarea(this)" title="Eliminar">
 									<i class="fa fa-trash"></i>
 									Eliminar
 								</button>
